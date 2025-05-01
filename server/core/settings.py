@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$lrdx55%g0ekq7%jz=e36p!+*pk0cmeua*v5scrlw111x*xkkx'
+SECRET_KEY = 'django-insecure-jipbdc&^w9t3s+6l&bx3xtl^z5g)r3y9$ujxrt*4#fs6i5iu(r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,19 +42,12 @@ INSTALLED_APPS = [
     # Third Party Apps #
     'rest_framework',
     'djoser',
-    'dj_rest_auth',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    'django_filters',
     
-    # Social Providers #
-    'allauth.socialaccount.providers.google',
-    
-    # My Apps #
+    # Local Apps #
     'user',
+    'save',
 ]
-
-SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -145,10 +139,8 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
+   'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+   'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }
 
 AUTH_USER_MODEL = 'user.User'
-
-REST_AUTH = {
-    'USE_JWT': True,
-}
